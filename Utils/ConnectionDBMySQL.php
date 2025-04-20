@@ -9,7 +9,7 @@ class ConnectionDBMySQL{
     private static $password = '1055';
     private static $connection = null;
 
-    public static function Connection(){
+    public static function connection(){
         if(self::$connection=== null){
             try{
                 self::$connection = new PDO (
@@ -26,7 +26,7 @@ class ConnectionDBMySQL{
         return self::$connection;
     }
 
-    public static function Disconnect(){
+    public static function disconnect(){
         self::$connection = null;
     }
 }

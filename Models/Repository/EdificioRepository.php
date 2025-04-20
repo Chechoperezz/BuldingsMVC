@@ -20,8 +20,21 @@ class EdificioRepository
         $stmt = $this->connection->query($query);
         $edificios=[];
 
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $edificios[] = new Edificio($row['id'],$row['nombre'],$row['direccion'],$row['telefono']);
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $edificios[] = new Edificio(
+                $row['nombre'],
+                $row['metros_cuadrados'],
+                $row['altura'],
+                $row['numPisos'],
+                $row['numApartamentos'],
+                $row['numOficinas'],
+                $row['nomParqueadero'],
+                $row['numPiscinas'],
+                $row['tieneAscensor'],
+                $row['valorAdministracion'],
+                $row['tieneZonaSocial'],
+                $row['ubicacion_id']
+            );
         }
         return $edificios;
     }
@@ -34,9 +47,41 @@ class EdificioRepository
         if (!$edificio) {
             return null;
         }
-        return new Edificio($edificio['id'],$edificio['nombre'],$edificio['direccion'],$edificio['telefono']);
+        return new Edificio($edificio['nombre'],
+            $edificio['metros_cuadrados'],
+            $edificio['altura'],
+            $edificio['numPisos'],
+            $edificio['numApartamentos'],
+            $edificio['numOficinas'],
+            $edificio['nomParqueadero'],
+            $edificio['numPiscinas'],
+            $edificio['tieneAscensor'],
+            $edificio['valorAdministracion'],
+            $edificio['tieneZonaSocial'],
+            $edificio['ubicacion_id']);
     }
 
+    public function findByName($name) : ?Edificio{
+        $query = "SELECT * FROM Edificios WHERE nombre =:name";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute(['name' => $name]);
+        $edificio = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$edificio) {
+            return null;
+        }
+        return new Edificio($edificio['nombre'],
+            $edificio['metros_cuadrados'],
+            $edificio['altura'],
+            $edificio['numPisos'],
+            $edificio['numApartamentos'],
+            $edificio['numOficinas'],
+            $edificio['nomParqueadero'],
+            $edificio['numPiscinas'],
+            $edificio['tieneAscensor'],
+            $edificio['valorAdministracion'],
+            $edificio['tieneZonaSocial'],
+            $edificio['ubicacion_id']);
+    }
     public function save(Edificio $edificio)
     {
         if ($edificio->getId() === null) {
@@ -67,7 +112,6 @@ class EdificioRepository
             }
             return $success;
         } else {
-
             return $this->update($edificio);
         }
     }
@@ -105,4 +149,13 @@ class EdificioRepository
 
         return $stmt->rowCount() > 0;
     }
+
+    public function delete(int $id): bool
+    {
+        $query = "DELETE FROM Edificios WHERE id = :id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
 }

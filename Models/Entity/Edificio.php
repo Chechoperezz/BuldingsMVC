@@ -19,20 +19,21 @@ class Edificio {
 
     private int $numPiscinas;
 
-    private bool $ascensor;
+    private int $ascensor;
 
     private float $valorAdministracion;
 
-    private bool $zonaSocial;
+    private int $zonaSocial;
 
     private int $ubicacion;
+
 
 
     public function __construct(string $nombre, float $metrosCuadrados, float $altura,
                                 int $numPisos, int $numApartamentos,
                                 int $numOficinas, string $nomParqueaderos,
-                                int $numPiscinas, bool $ascensor, float $valorAdministracion,
-                                bool $zonaSocial, int $ubicacion){
+                                int $numPiscinas, int $ascensor, float $valorAdministracion,
+                                int $zonaSocial, int $ubicacion){
 
         $this->nombre=$nombre;
         $this->metrosCuadrados=$metrosCuadrados;
@@ -139,12 +140,12 @@ class Edificio {
         $this->numPiscinas = $numPiscinas;
     }
 
-    public function isAscensor(): bool
+    public function getAscensor(): int
     {
         return $this->ascensor;
     }
 
-    public function setAscensor(bool $ascensor): void
+    public function setAscensor(int $ascensor): void
     {
         $this->ascensor = $ascensor;
     }
@@ -159,12 +160,12 @@ class Edificio {
         $this->valorAdministracion = $valorAdministracion;
     }
 
-    public function isZonaSocial(): bool
+    public function getZonaSocial(): int
     {
         return $this->zonaSocial;
     }
 
-    public function setZonaSocial(bool $zonaSocial): void
+    public function setZonaSocial(int $zonaSocial): void
     {
         $this->zonaSocial = $zonaSocial;
     }
