@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Models\Services\EdificioService;
-
+include 'Views/edificio/listar.php';
 class EdificioController
 {
     private EdificioService $edificioService;
@@ -73,13 +73,20 @@ class EdificioController
     public function listar()
     {
         try {
+
             $edificios = $this->edificioService->getAllEdificios();
-            header('Content-Type: application/json');
-            echo json_encode($edificios);
+
+            if ($edificios === null) {
+                throw new Exception("No se encontraron edificios.");
+            }
+
+
+            include 'Views/edificio/listar.php';
         } catch (Exception $e) {
             echo "Error al listar edificios: " . $e->getMessage();
         }
     }
+
 
     public function verPorId(int $id)
     {
