@@ -3,13 +3,24 @@
 namespace Controllers;
 
 use Models\Services\EdificioService;
+use Models\Entity\Edificio;
+use Exception;
+use Models\Services\UsuarioService;
+
 include 'Views/edificio/listar.php';
 class EdificioController
 {
     private EdificioService $edificioService;
 
-    public function __construct()
-    {
+    public function __construct() {
+        session_start();
+
+
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: /usuario/loginForm");
+            exit();
+        }
+
         $this->edificioService = new EdificioService();
     }
 
