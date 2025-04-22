@@ -4,50 +4,36 @@ namespace Models\Entity;
 class Edificio {
     private ?int $id = null;
     private string $nombre;
-
     private float $metrosCuadrados;
-
     private float $altura;
-
     private int $numPisos;
-
     private int $numApartamentos;
-
-    private  int $numOficinas;
-
-    private ?string $nomParqueaderos;
-
+    private int $numOficinas;
+    private ?string $nomParqueadero;
     private int $numPiscinas;
-
     private int $ascensor;
-
     private float $valorAdministracion;
-
     private int $zonaSocial;
+    private string $direccionExacta;
+    private int $municipioId;
 
-    private int $ubicacion;
-
-
-
-    public function __construct(string $nombre, float $metrosCuadrados, float $altura,
-                                int $numPisos, int $numApartamentos,
-                                int $numOficinas, string $nomParqueaderos,
-                                int $numPiscinas, int $ascensor, float $valorAdministracion,
-                                int $zonaSocial, int $ubicacion){
-
-        $this->nombre=$nombre;
-        $this->metrosCuadrados=$metrosCuadrados;
-        $this->altura=$altura;
-        $this->numPisos=$numPisos;
-        $this->numApartamentos=$numApartamentos;
-        $this->numOficinas=$numOficinas;
-        $this->nomParqueaderos=$nomParqueaderos;
-        $this->numPiscinas=$numPiscinas;
-        $this->ascensor=$ascensor;
-        $this->valorAdministracion=$valorAdministracion;
-        $this->zonaSocial=$zonaSocial;
-        $this->ubicacion=$ubicacion;
-
+    public function __construct(string $nombre, float $metrosCuadrados, float $altura, int $numPisos, int $numApartamentos,
+                                int $numOficinas, ?string $nomParqueadero, int $numPiscinas, int $ascensor,
+                                float $valorAdministracion, int $zonaSocial, string $direccionExacta, int $municipioId
+    ) {
+        $this->nombre = $nombre;
+        $this->metrosCuadrados = $metrosCuadrados;
+        $this->altura = $altura;
+        $this->numPisos = $numPisos;
+        $this->numApartamentos = $numApartamentos;
+        $this->numOficinas = $numOficinas;
+        $this->nomParqueadero = $nomParqueadero;
+        $this->numPiscinas = $numPiscinas;
+        $this->ascensor = $ascensor;
+        $this->valorAdministracion = $valorAdministracion;
+        $this->zonaSocial = $zonaSocial;
+        $this->direccionExacta = $direccionExacta;
+        $this->municipioId = $municipioId;
     }
 
     public function getId(): ?int
@@ -120,14 +106,14 @@ class Edificio {
         $this->numOficinas = $numOficinas;
     }
 
-    public function getNomParqueaderos(): ?string
+    public function getNomParqueadero(): ?string
     {
-        return $this->nomParqueaderos;
+        return $this->nomParqueadero;
     }
 
-    public function setNomParqueaderos(?string $nomParqueaderos): void
+    public function setNomParqueadero(?string $nomParqueadero): void
     {
-        $this->nomParqueaderos = $nomParqueaderos;
+        $this->nomParqueadero = $nomParqueadero;
     }
 
     public function getNumPiscinas(): int
@@ -170,15 +156,28 @@ class Edificio {
         $this->zonaSocial = $zonaSocial;
     }
 
-    public function getUbicacion(): int
+    public function getDireccionExacta(): string
     {
-        return $this->ubicacion;
+        return $this->direccionExacta;
     }
 
-    public function setUbicacion(int $ubicacion): void
+    public function setDireccionExacta(string $direccionExacta): void
     {
-        $this->ubicacion = $ubicacion;
+        $this->direccionExacta = $direccionExacta;
     }
+
+    public function getMunicipioId(): int
+    {
+        return $this->municipioId;
+    }
+
+    public function setMunicipioId(int $municipioId): void
+    {
+        $this->municipioId = $municipioId;
+    }
+
+
+
 
 }
 ?>

@@ -1,5 +1,10 @@
 <?php
 
+
+namespace Utils;
+
+use PDO;
+use PDOException;
 class ConnectionDBMySQL{
 
     private static $host = '127.0.0.1';
@@ -15,8 +20,10 @@ class ConnectionDBMySQL{
                 self::$connection = new PDO (
                     "mysql:host=". self::$host . ";dbname=".self::$database . ";charset=utf8",
                     self::$user,
-                    self::$password
+                    self::$password,
+
                 );
+                self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             }catch (PDOException $e){
                 die("Error en conexion " .$e->getMessage());

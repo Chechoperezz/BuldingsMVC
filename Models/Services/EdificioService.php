@@ -61,12 +61,12 @@ class EdificioService
             throw new Exception("El valor de administración no puede ser negativo.");
         }
 
-        if (!is_bool($edificio->getAscensor())) {
-            throw new Exception("El valor de ascensor debe ser booleano (true o false).");
+        if ($edificio->getAscensor()<0) {
+            throw new Exception("El numero de ascensor no puede  ser negativo.");
         }
 
-        if (!is_bool($edificio->getZonaSocial())) {
-            throw new Exception("El valor de zona social debe ser booleano (true o false).");
+        if ($edificio->getZonaSocial()<0) {
+            throw new Exception("El numero de zonas sociales no debe ser negativo .");
         }
 
         if ($edificio->getMunicipioId() <= 0) {
